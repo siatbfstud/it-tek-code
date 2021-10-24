@@ -1,8 +1,4 @@
 credentials = {
-    #'ssid' : 'Iphone x Nicolaj johansen',
-    #'password' : 'kjb77fva',
-    #'ssid' : '4-ManStack',
-    #'password' : 'Jasmin123',
     'ssid' : 'HUAWEI P30 Pro',
     'password' : '11111111',
     'ADAFRUIT_IO_URL' : b'io.adafruit.com',
