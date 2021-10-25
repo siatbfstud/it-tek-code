@@ -2,7 +2,7 @@ import umqtt_robust2
 from machine import Pin
 import dht
 from opg3 import randomJoke
-from temp import *
+import temp
 from time import sleep_ms, sleep
 lib = umqtt_robust2
 sensor = dht.DHT11(Pin(19))
@@ -67,12 +67,13 @@ while True:
         
         if besked == "10 temp":
             for a in range(10):
-                temperatur()
-                #lib.c.publish(topic=lib.mqtt_pub_feedname, msg="%i" % templist[a])
-                #lib.besked = ""
+                temp.temperatur()
                 sleep(1)
-            lib.c.publish(topic=lib.mqtt_pub_feedname, msg="".join(str(templist)))
+            lib.c.publish(topic=lib.mqtt_pub_feedname, msg="".join(str(temp.templist)))
             lib.besked = ""
+            
+        if besked == "tilføj temp":
+            temperatur()
 
     except KeyboardInterrupt:
         print('Ctrl-C pressed...exiting')
