@@ -4,6 +4,7 @@ import dht
 from opg3 import randomJoke
 import temp
 from time import sleep_ms, sleep
+
 lib = umqtt_robust2
 sensor = dht.DHT11(Pin(19))
 led = Pin(18, Pin.OUT, value = 0)
@@ -69,11 +70,17 @@ while True:
             for a in range(10):
                 temp.temperatur()
                 sleep(1)
-            lib.c.publish(topic=lib.mqtt_pub_feedname, msg="".join(str(temp.templist)))
+            lib.c.publish(topic=lib.mqtt_pub_feedname, msg="10 temperaturer tilføjet")
             lib.besked = ""
             
         if besked == "tilføj temp":
-            temperatur()
+            temp.temperatur()
+            lib.c.publish(topic=lib.mqtt_pub_feedname, msg="Temperatur tilføjet")
+            lib.besked = ""
+            
+        if besked == "vis temp":
+            lib.c.publish(topic=lib.mqtt_pub_feedname, msg="".join(str(temp.templist)))
+            lib.besked = ""
 
     except KeyboardInterrupt:
         print('Ctrl-C pressed...exiting')
